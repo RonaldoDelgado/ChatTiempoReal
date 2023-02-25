@@ -18,7 +18,12 @@ app.use(cors());
 
 io.on("connection", (socket) => {
   console.log(socket.id);
-  console.log("usuario conectado");
+  socket.on("message", (message) => {
+    socket.broadcast.emit("message", {
+      body: message,
+      from: socket.id,
+    });
+  });
 });
 
 server.listen(PORT);

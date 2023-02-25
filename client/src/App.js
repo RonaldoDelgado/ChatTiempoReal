@@ -1,14 +1,9 @@
 import "./App.css";
-import io from "socket.io-client";
 
-const socket = io("http://localhost:4000");
+import Chat from "./components/chat.jsx";
 
 function App() {
-  return (
-    <div className="App">
-      <h1>Hola</h1>
-    </div>
-  );
+  return <Chat />;
 }
 
 export default App;
