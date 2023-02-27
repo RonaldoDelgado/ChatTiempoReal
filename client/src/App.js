@@ -1,9 +1,10 @@
 import "./App.css";
-
-import Chat from "./components/chat.jsx";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import Chat from "./components/Chat.jsx";
+import LandingPage from "./components/LandingPage";
 
 function App() {
-  return <Chat />;
+  return <LandingPage />;
 }
 
 export default App;
