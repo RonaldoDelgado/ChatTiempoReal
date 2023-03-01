@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 mongoose.set("strictQuery", false);
 mongoose
-  .connect("mongodb://Localhost/cahtdb", {
+  .connect("mongodb://Localhost/chatdb", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
