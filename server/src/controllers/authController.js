@@ -19,12 +19,10 @@ export const signUp = async (req, res) => {
     newUser.roles = [role._id];
   }
   const saveUser = await newUser.save();
-  console.log(saveUser);
-  const token = jwt.sign({ id: saveUser._id }, SECRET, {
-    expiresIn: 86400,
-  });
-  res.status(200).json({ token });
+
+  res.status(200).json({ ...saveUser._doc });
 };
+
 export const signIn = async (req, res) => {
   const userFound = await User.findOne({ email: req.body.email }).populate(
     "roles"
@@ -39,11 +37,6 @@ export const signIn = async (req, res) => {
 
   if (!matchPass)
     return res.status(400).json({ message: "Contraseña incorrecta" });
-  console.log(userFound);
 
-  const token = jwt.sign({ id: saveUser._id }, SECRET, {
-    expiresIn: 86400,
-  });
-
-  res.json({ token });
+  res.json({ message: "iniciaste sesion" });
 };

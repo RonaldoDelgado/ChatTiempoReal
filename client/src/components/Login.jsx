@@ -2,6 +2,7 @@ import imgUser from "../assets/username-icon.svg";
 import imgPass from "../assets/password-icon.svg";
 import imgLogo from "../assets/login-icon.svg";
 import imgGoogle from "../assets/google-icon.svg";
+import { Link } from "react-router-dom";
 
 export default function Login() {
   return (
@@ -44,7 +45,7 @@ export default function Login() {
           <div className="pt-1">¿Olvidaste tu contraseña?</div>
         </div>
         <div className="btn btn-info text-white w-100 mt-4 fw-semibold shadow-sm">
-          Login
+          <Link to="/chat">Entrar</Link>
         </div>
         <div className="d-flex gap-1 justify-content-center mt-1">
           <div>¿No tienes una cuenta?</div>
