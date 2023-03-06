@@ -1,9 +1,15 @@
 import io from "socket.io-client";
 import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 const socket = io("http://localhost:4000");
 
 export default function Catch() {
+  //Selectos START
+  const User = useSelector((state) => state.User);
+  //Selectos END
+
+  //Estates START
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([
     {
@@ -11,6 +17,9 @@ export default function Catch() {
       from: "usuario test",
     },
   ]);
+  //Estates END
+
+  //Funciones
   const handlerSubmint = (e) => {
     e.preventDefault();
     socket.emit("message", message);
@@ -38,6 +47,7 @@ export default function Catch() {
       <div className="container mt-3">
         <div className="card shadow border-0">
           <div className="card-body">
+            <label htmlFor="">{User.username}</label>
             <form onSubmit={handlerSubmint}>
               <input
                 type="text"

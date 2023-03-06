@@ -5,16 +5,20 @@ import http from "http";
 import router from "./routes/index.js";
 import cors from "cors";
 import { createRoles } from "./libs/initialRole.js";
+import cookieParser from "cookie-parser";
+import bodyParser from "body-parser";
 
 const app = express();
 createRoles();
 const server = http.createServer(app);
 const io = new SocketServer(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: "*",
   },
 });
-
+app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
+app.use(bodyParser.json({ limit: "50mb" }));
+app.use(cookieParser());
 app.use(morgan("dev"));
 app.use(cors());
 app.use(express.json());

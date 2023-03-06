@@ -3,8 +3,28 @@ import imgPass from "../assets/password-icon.svg";
 import imgLogo from "../assets/login-icon.svg";
 import imgGoogle from "../assets/google-icon.svg";
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { getSignIn } from "../redux/actions";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
+  const dispatch = useDispatch();
+  const navegate = useNavigate();
+  const [inputLogin, setInputLogin] = useState({ email: "", password: "" });
+
+  function handlerInput(e) {
+    setInputLogin({
+      ...inputLogin,
+      [e.target.name]: e.target.value,
+    });
+    console.log(e.target.name + " " + e.target.value);
+  }
+
+  function handlerClick() {
+    dispatch(getSignIn(inputLogin)).then((e) => console.log("promesa", e));
+    console.log("Ocurrio el dispatch");
+  }
   return (
     <div className="bg-info d-flex justify-content-center align-items-center vh-100">
       <div
@@ -20,9 +40,11 @@ export default function Login() {
             <img src={imgUser} alt="username-icon" Style="height: 1rem" />
           </div>
           <input
+            name="email"
             className="form-control bg-light"
             type="text"
-            placeholder="Ussuario"
+            placeholder="Correo"
+            onChange={handlerInput}
           />
         </div>
         <div className="input-group mt-1">
@@ -30,9 +52,11 @@ export default function Login() {
             <img src={imgPass} alt="password-icon" Style="height: 1rem" />
           </div>
           <input
+            name="password"
             className="form-control bg-light"
             type="password"
             placeholder="Contraseña"
+            onChange={handlerInput}
           />
         </div>
         <div className="d-flex justify-content-around mt-1">
@@ -44,8 +68,11 @@ export default function Login() {
           </div>
           <div className="pt-1">¿Olvidaste tu contraseña?</div>
         </div>
-        <div className="btn btn-info text-white w-100 mt-4 fw-semibold shadow-sm">
-          <Link to="/chat">Entrar</Link>
+        <div
+          className="btn btn-info text-white w-100 mt-4 fw-semibold shadow-sm"
+          onClick={handlerClick}
+        >
+          ENTRAR
         </div>
         <div className="d-flex gap-1 justify-content-center mt-1">
           <div>¿No tienes una cuenta?</div>

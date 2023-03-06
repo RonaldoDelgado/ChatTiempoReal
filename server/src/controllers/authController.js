@@ -1,6 +1,4 @@
 import User from "../models/User.js";
-import jwt from "jsonwebtoken";
-import { SECRET } from "../../config.js";
 import Role from "../models/Roles.js";
 
 export const signUp = async (req, res) => {
@@ -24,6 +22,7 @@ export const signUp = async (req, res) => {
 };
 
 export const signIn = async (req, res) => {
+  console.log("este es el body ", req.body);
   const userFound = await User.findOne({ email: req.body.email }).populate(
     "roles"
   );
@@ -38,5 +37,5 @@ export const signIn = async (req, res) => {
   if (!matchPass)
     return res.status(400).json({ message: "Contraseña incorrecta" });
 
-  res.json({ message: "iniciaste sesion" });
+  res.send(userFound);
 };
